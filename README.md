@@ -25,11 +25,19 @@ TEST CASES
 1. Normal Inputs
 
 ![image](https://github.com/user-attachments/assets/0ad698ba-c2e3-4115-9550-7e8fcfbe6686)
+![image](https://github.com/user-attachments/assets/a73bb535-3977-44da-9f84-113207e4fae4)
+
+
 ![image](https://github.com/user-attachments/assets/66300fc1-4175-43a4-9984-483a0b6a76ea)
+![image](https://github.com/user-attachments/assets/fd8fa655-1acc-4d7b-b2af-cbf189e9a17f)
+
 
 ![image](https://github.com/user-attachments/assets/f5247f50-2379-4bac-8955-285e96595ee3)
-![image](https://github.com/user-attachments/assets/8adeef25-19a9-481f-9e3b-ec9cd09464e6)
+![image](https://github.com/user-attachments/assets/00be30c9-a9c1-4c48-9c29-2318046a0f15)
 
+
+![image](https://github.com/user-attachments/assets/8adeef25-19a9-481f-9e3b-ec9cd09464e6)
+![image](https://github.com/user-attachments/assets/2443e850-f768-40df-ab6a-fc4359929ad4)
 
 2. Smallest Positive
 
