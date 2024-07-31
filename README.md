@@ -57,7 +57,7 @@ TEST CASES
 ![image](https://github.com/user-attachments/assets/733bba26-aa24-4518-a819-22a698d2814a)
 
 
-4. Smallest Negative
+3. Smallest Negative
 
 ![image](https://github.com/user-attachments/assets/5a785e36-4c39-444d-a1c4-bfcae9ff380b)
 ![image](https://github.com/user-attachments/assets/ac790302-d83a-4a2b-bf8d-b60f202052c7)
@@ -76,9 +76,24 @@ TEST CASES
 
 
 
+4. Zero
+![image](https://github.com/user-attachments/assets/cecb7cd0-e7c0-4cb4-bde5-5af55bde809b)
+![image](https://github.com/user-attachments/assets/4c039ec6-77b6-4f59-bec8-9da7794ef423)
 
-5. Zero
-6. Negative Zero
-7. Infinity
-8. Negative Infinity
-9. NaN
+
+![image](https://github.com/user-attachments/assets/77cd8bad-27ad-4af9-920d-89d719afb972)
+![image](https://github.com/user-attachments/assets/d0326ef9-98a9-4c5f-81e2-7addd9ffd52a)
+
+
+![image](https://github.com/user-attachments/assets/484a307a-43ef-43dd-a671-36248f6f7249)
+![image](https://github.com/user-attachments/assets/0060deb6-b388-4250-a002-556b8612e4b1)
+
+
+![image](https://github.com/user-attachments/assets/7e2e4935-51fd-4625-81c3-7dbb7b567a77)
+![image](https://github.com/user-attachments/assets/2af2a2f4-1666-4825-a643-56010ee18cdc)
+
+
+7. Negative Zero
+8. Infinity
+9. Negative Infinity
+10. NaN
