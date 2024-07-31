@@ -133,5 +133,19 @@ TEST CASES
    
 7. Negative Infinity
 
+![image](https://github.com/user-attachments/assets/ea9977fb-213a-48fd-99ab-43df82e61f62)
+![image](https://github.com/user-attachments/assets/fff0f626-e5a6-4c74-940f-e52847905ec6)
+
+
+![image](https://github.com/user-attachments/assets/27359e23-bd68-4867-a3f5-e470a617367c)
+![image](https://github.com/user-attachments/assets/f52fd05b-300f-429a-917f-84ba8c938b27)
+
+
+![image](https://github.com/user-attachments/assets/d322085b-c36d-4635-9743-a75aaa17218d)
+![image](https://github.com/user-attachments/assets/c344e2a2-a11f-47a2-9119-cfba7dcd1297)
+
+
+![image](https://github.com/user-attachments/assets/14d0c013-35ae-459a-ad2f-783b9939f0c8)
+![image](https://github.com/user-attachments/assets/62c4ea15-138f-44df-ae12-96508be0dff8)
   
 8. NaN
