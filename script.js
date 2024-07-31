@@ -18,8 +18,11 @@ function convert() {
     try {
         if (inputType === 'hex') {
             const hexInput = $('#hexInput').val().trim();
+            console.log('Hex Input:', hexInput); // Debugging
             if (isValidHex(hexInput)) {
-                result = hexToDecimal(hexInput);
+                const binaryRepresentation = hexToBinary(hexInput);
+                console.log('Binary Representation:', binaryRepresentation); // Debugging
+                result = binaryToDecimal(binaryRepresentation);
                 // Check and handle special cases for hex input
                 const specialCaseResult = checkHexSpecialCases(hexInput);
                 if (specialCaseResult !== null) {
@@ -32,6 +35,7 @@ function convert() {
             }
         } else {
             const binaryInput = $('#binaryInput').val().replace(/\s+/g, '');
+            console.log('Binary Input:', binaryInput); // Debugging
             if (isValidBinary(binaryInput)) {
                 result = binaryToDecimal(binaryInput);
                 // Check and handle special cases for binary input
@@ -51,10 +55,10 @@ function convert() {
             const fixedPointValue = Number(result.decimal).toFixed(2); // Adjust for fixed-point representation
             $('#decimalResult').text(fixedPointValue);
         } else if (decimalType === 'floating') {
-            // Include negative sign if the number is negative
+            // Format the result in scientific notation with base 10
             const resultString = result.decimal < 0 ? 
-                `-${Math.abs(result.significand).toFixed(2)} * ${result.base}^${result.exponent}` : 
-                `${Math.abs(result.significand).toFixed(2)} * ${result.base}^${result.exponent}`;
+                `-${Math.abs(result.decimal).toExponential().replace('e+', ' * 10^')}` : 
+                `${Math.abs(result.decimal).toExponential().replace('e+', ' * 10^')}`;
             $('#decimalResult').text(resultString);
         }
     } catch (error) {
@@ -64,17 +68,29 @@ function convert() {
 }
 
 function isValidHex(hex) {
-    return /^[0-9A-Fa-f]{8}$/.test(hex);
+    // Ensure hexadecimal input is exactly 8 digits
+    const valid = /^[0-9A-Fa-f]{8}$/.test(hex);
+    console.log('Hex Valid:', valid); // Debugging
+    return valid;
 }
 
 function isValidBinary(binary) {
-    return /^[01]{32}$/.test(binary);
+    // Ensure binary input is exactly 32 digits
+    const valid = /^[01]{32}$/.test(binary);
+    console.log('Binary Valid:', valid); // Debugging
+    return valid;
 }
 
-function hexToDecimal(hex) {
+function hexToBinary(hex) {
     // Convert hexadecimal to binary
-    const binary = parseInt(hex, 16).toString(2).padStart(32, '0');
-    return binaryToDecimal(binary);
+    try {
+        const binary = parseInt(hex, 16).toString(2).padStart(32, '0');
+        console.log('Hex to Binary:', binary); // Debugging
+        return binary;
+    } catch (error) {
+        console.error('Error converting hex to binary:', error);
+        throw error;
+    }
 }
 
 function binaryToDecimal(binary) {
@@ -97,7 +113,7 @@ function binaryToDecimal(binary) {
 
     // Prepare detailed result
     const significand = mantissaValue.toFixed(2); // Format for better readability
-    const base = 2;
+    const base = 10; // Use base 10 for floating-point representation
     const detailedResult = {
         decimal,
         significand,
@@ -105,6 +121,7 @@ function binaryToDecimal(binary) {
         exponent
     };
 
+    console.log('Binary to Decimal Result:', detailedResult); // Debugging
     return detailedResult;
 }
 
@@ -118,7 +135,9 @@ function checkSpecialCases(value) {
         '01111111110000000000000000000000': 'NaN'
     };
 
-    return binarySpecialCases[value] || null;
+    const result = binarySpecialCases[value] || null;
+    console.log('Binary Special Cases Result:', result); // Debugging
+    return result;
 }
 
 function checkHexSpecialCases(hex) {
@@ -131,8 +150,9 @@ function checkHexSpecialCases(hex) {
         '7FC00000': 'NaN'
     };
 
-    // Check special cases for hexadecimal input
-    return hexSpecialCases[hex] || null;
+    const result = hexSpecialCases[hex] || null;
+    console.log('Hex Special Cases Result:', result); // Debugging
+    return result;
 }
 
 function copyToNotepad() {
