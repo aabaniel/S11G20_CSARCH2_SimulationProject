@@ -20,6 +20,12 @@ function convert() {
             const hexInput = $('#hexInput').val().trim();
             if (isValidHex(hexInput)) {
                 result = hexToDecimal(hexInput);
+                // Check and handle special cases for hex input
+                const specialCaseResult = checkHexSpecialCases(hexInput);
+                if (specialCaseResult !== null) {
+                    $('#decimalResult').text(specialCaseResult);
+                    return;
+                }
             } else {
                 alert('Invalid Hexadecimal Input');
                 return;
@@ -28,24 +34,28 @@ function convert() {
             const binaryInput = $('#binaryInput').val().replace(/\s+/g, '');
             if (isValidBinary(binaryInput)) {
                 result = binaryToDecimal(binaryInput);
+                // Check and handle special cases for binary input
+                const specialCaseResult = checkSpecialCases(binaryInput);
+                if (specialCaseResult !== null) {
+                    $('#decimalResult').text(specialCaseResult);
+                    return;
+                }
             } else {
                 alert('Invalid Binary Input');
                 return;
             }
         }
 
-        // Check and handle special cases
-        const specialCaseResult = checkSpecialCases(result.decimal || result);
-        if (specialCaseResult !== null) {
-            $('#decimalResult').text(specialCaseResult);
-        } else {
-            const decimalType = $('#decimalType').val();
-            if (decimalType === 'fixed' && !isNaN(result.decimal)) {
-                const fixedPointValue = Number(result.decimal).toFixed(2); // Adjust for fixed-point representation
-                $('#decimalResult').text(fixedPointValue);
-            } else if (decimalType === 'floating') {
-                $('#decimalResult').text(`${result.significand} * ${result.base}^${result.exponent}`);
-            }
+        const decimalType = $('#decimalType').val();
+        if (decimalType === 'fixed' && !isNaN(result.decimal)) {
+            const fixedPointValue = Number(result.decimal).toFixed(2); // Adjust for fixed-point representation
+            $('#decimalResult').text(fixedPointValue);
+        } else if (decimalType === 'floating') {
+            // Include negative sign if the number is negative
+            const resultString = result.decimal < 0 ? 
+                `-${Math.abs(result.significand).toFixed(2)} * ${result.base}^${result.exponent}` : 
+                `${Math.abs(result.significand).toFixed(2)} * ${result.base}^${result.exponent}`;
+            $('#decimalResult').text(resultString);
         }
     } catch (error) {
         console.error('Error during conversion:', error);
@@ -108,13 +118,21 @@ function checkSpecialCases(value) {
         '01111111110000000000000000000000': 'NaN'
     };
 
-    // Convert value to binary if it's hexadecimal
-    if (value.length === 8) {
-        const binaryValue = parseInt(value, 16).toString(2).padStart(32, '0');
-        return binarySpecialCases[binaryValue] || null;
-    }
-
     return binarySpecialCases[value] || null;
+}
+
+function checkHexSpecialCases(hex) {
+    // Define special cases for hexadecimal values
+    const hexSpecialCases = {
+        '00000000': 'Zero',
+        '80000000': '-Zero',
+        '7F800000': 'Infinity',
+        'FF800000': '-Infinity',
+        '7FC00000': 'NaN'
+    };
+
+    // Check special cases for hexadecimal input
+    return hexSpecialCases[hex] || null;
 }
 
 function copyToNotepad() {
