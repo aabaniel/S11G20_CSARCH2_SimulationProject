@@ -169,11 +169,6 @@ function copyToNotepad() {
         return;
     }
 
-    // Convert hexadecimal to binary
-    function hexToBinary(hex) {
-        return parseInt(hex, 16).toString(2).padStart(32, '0');
-    }
-
     // Convert binary to hexadecimal
     function binaryToHex(binary) {
         return parseInt(binary, 2).toString(16).toUpperCase().padStart(8, '0');
@@ -181,7 +176,7 @@ function copyToNotepad() {
 
     // Format binary with spaces
     function formatBinary(binary) {
-        return `${binary[0]} ${binary.slice(1, 9)} ${binary.slice(9)}`;
+        return `${binary.slice(0, 1)} ${binary.slice(1, 9)} ${binary.slice(9)}`;
     }
 
     // Format the content of the notepad text
@@ -198,14 +193,21 @@ function copyToNotepad() {
         content += `Equivalent 8-digit Hexadecimal Representation: ${binaryToHex(binaryInput)}\n`;
     }
     content += `Decimal Output Type Selected: ${decimalType === 'fixed' ? 'Fixed Point' : 'Floating Point'}\n`;
+
+    // Include the result directly from HTML display
     content += `\nResult: ${decimalResult}\n`;
 
     // Create and download the file
-    const blob = new Blob([content], { type: 'text/plain' });
-    const link = document.createElement('a');
-    link.download = 'FloatingPointResult.txt';
-    link.href = window.URL.createObjectURL(blob);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+        const blob = new Blob([content], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.download = 'FloatingPointResult.txt';
+        link.href = window.URL.createObjectURL(blob);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (error) {
+        console.error('Error creating or downloading file:', error);
+        alert('An error occurred while saving to notepad. Check the console for details.');
+    }
 }
