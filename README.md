@@ -149,3 +149,23 @@ TEST CASES
 ![image](https://github.com/user-attachments/assets/62c4ea15-138f-44df-ae12-96508be0dff8)
   
 8. NaN
+
+![image](https://github.com/user-attachments/assets/2fe83335-fc7a-4a11-8a2d-b0c22f597cc8)
+![image](https://github.com/user-attachments/assets/677abe7c-1122-4564-8d9a-d9eeccbf37de)
+
+
+![image](https://github.com/user-attachments/assets/f8aff40d-f6dc-4cdb-ac1b-3546ee8e76fb)
+![image](https://github.com/user-attachments/assets/87c7cb66-a1de-4bf3-91d0-8201ce007eef)
+
+
+![image](https://github.com/user-attachments/assets/f2ec26b7-4c4d-4d66-9404-f63441165032)
+![image](https://github.com/user-attachments/assets/c940628b-4f22-4db1-8409-24057a160469)
+
+
+![image](https://github.com/user-attachments/assets/11834247-d559-4fbd-bcb0-68cc41dba72f)
+![image](https://github.com/user-attachments/assets/467cc235-cecb-424f-9133-06324f5dd269)
+
+
+
+
+
