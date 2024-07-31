@@ -112,13 +112,26 @@ TEST CASES
 ![image](https://github.com/user-attachments/assets/fea349d4-343f-47c5-bdb7-82661acbde6d)
 
 
+6. Infinity
+
+![image](https://github.com/user-attachments/assets/6794b6d7-4a54-4cf6-89db-e2e5ec6156f2)
+![image](https://github.com/user-attachments/assets/5094320a-f343-43f4-9fa0-06d99c7141dd)
 
 
+![image](https://github.com/user-attachments/assets/5dc9ce1a-c154-4cde-949c-44914528dcda)
+![image](https://github.com/user-attachments/assets/d2a6e69f-a255-4573-b5dd-3e7084eb0a1f)
 
 
+![image](https://github.com/user-attachments/assets/9e56e9fc-9303-40f6-a2b8-7696269752df)
+![image](https://github.com/user-attachments/assets/cd7102dc-cb6c-46c5-8fac-b0165781bc91)
 
+
+![image](https://github.com/user-attachments/assets/683815b4-be00-46a3-a87f-5cb7866291eb)
+![image](https://github.com/user-attachments/assets/4816c985-a2fc-4793-ad36-d70750d5c7cc)
+
+
+   
+7. Negative Infinity
 
   
-9. Infinity
-10. Negative Infinity
-11. NaN
+8. NaN
