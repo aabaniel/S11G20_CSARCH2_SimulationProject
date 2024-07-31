@@ -60,10 +60,21 @@ TEST CASES
 4. Smallest Negative
 
 ![image](https://github.com/user-attachments/assets/5a785e36-4c39-444d-a1c4-bfcae9ff380b)
+![image](https://github.com/user-attachments/assets/ac790302-d83a-4a2b-bf8d-b60f202052c7)
+
+
 ![image](https://github.com/user-attachments/assets/98d327e4-8473-4b62-8459-dff56776a010)
+![image](https://github.com/user-attachments/assets/dfe0290e-01a7-47df-b146-369c2c2b618e)
+
 
 ![image](https://github.com/user-attachments/assets/252e09a7-b922-407c-b041-4a884274b1f0)
+![image](https://github.com/user-attachments/assets/1b8d37d5-b264-4bf1-a92b-d0e8954b13e8)
+
+
 ![image](https://github.com/user-attachments/assets/385f9b0d-12dd-4bb3-85c2-555861a6ed03)
+![image](https://github.com/user-attachments/assets/98f1aa9a-f7b2-4f73-8ed2-d48739f5d095)
+
+
 
 
 5. Zero
