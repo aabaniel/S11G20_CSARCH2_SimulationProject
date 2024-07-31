@@ -158,10 +158,10 @@ function checkHexSpecialCases(hex) {
 function copyToNotepad() {
     // Collect input values
     const inputType = $('#inputType').val();
-    const hexInput = $('#hexInput').val();
+    const hexInput = $('#hexInput').val().trim();
     const binaryInput = $('#binaryInput').val().replace(/\s+/g, '');
     const decimalType = $('#decimalType').val();
-    const decimalResult = $('#decimalResult').text();
+    const decimalResult = $('#decimalResult').text().trim();
 
     // Check if there is a result to save
     if (!decimalResult) {
@@ -198,18 +198,7 @@ function copyToNotepad() {
         content += `Equivalent 8-digit Hexadecimal Representation: ${binaryToHex(binaryInput)}\n`;
     }
     content += `Decimal Output Type Selected: ${decimalType === 'fixed' ? 'Fixed Point' : 'Floating Point'}\n`;
-
-    // Include detailed floating point representation if available
-    const detailedResult = binaryToDecimal(inputType === 'hex' ? hexToBinary(hexInput) : binaryInput);
-    if (typeof detailedResult === 'object') {
-        if (decimalType === 'fixed') {
-            content += `\nResult: ${Number(detailedResult.decimal).toFixed(2)}\n`;
-        } else {
-            content += `\nResult: ${detailedResult.significand} * ${detailedResult.base}^${detailedResult.exponent}\n`;
-        }
-    } else {
-        content += `\nResult: ${detailedResult}\n`;
-    }
+    content += `\nResult: ${decimalResult}\n`;
 
     // Create and download the file
     const blob = new Blob([content], { type: 'text/plain' });
