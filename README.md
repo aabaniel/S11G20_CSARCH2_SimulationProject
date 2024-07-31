@@ -94,7 +94,31 @@ TEST CASES
 ![image](https://github.com/user-attachments/assets/2af2a2f4-1666-4825-a643-56010ee18cdc)
 
 
-7. Negative Zero
-8. Infinity
-9. Negative Infinity
-10. NaN
+5. Negative Zero
+
+![image](https://github.com/user-attachments/assets/74950dc9-d82f-4829-9bb9-9d93c54d975a)
+![image](https://github.com/user-attachments/assets/12704b11-dd50-472b-9ca0-7b5a2bd8a074)
+
+
+![image](https://github.com/user-attachments/assets/30bfa7b0-2920-42cb-bfd2-cf779cff78b4)
+![image](https://github.com/user-attachments/assets/5358f18c-e059-43c1-af93-28eb5c8995d3)
+
+
+![image](https://github.com/user-attachments/assets/2ca25e0b-3474-479d-8a5e-45fb414a8cd8)
+![image](https://github.com/user-attachments/assets/fa00dcec-83d9-41c3-b319-c3ca9aa74648)
+
+
+![image](https://github.com/user-attachments/assets/01f80312-031e-43cb-a737-8dc692af4829)
+![image](https://github.com/user-attachments/assets/fea349d4-343f-47c5-bdb7-82661acbde6d)
+
+
+
+
+
+
+
+
+  
+9. Infinity
+10. Negative Infinity
+11. NaN
