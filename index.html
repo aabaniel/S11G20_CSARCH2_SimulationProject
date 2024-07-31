@@ -14,23 +14,23 @@
         <h2 class="text-center">IEEE-754 Binary-32 Floating Point Translator</h2>
         <form>
             <div class="form-group">
-                <label for="inputType">Input Type:</label>
+                <label for="inputType">Input Type</label>
                 <select class="form-control" id="inputType" onchange="toggleInputFields()">
                     <option value="hex">8-digit Hexadecimal</option>
                     <option value="binary">32-bit Binary</option>
                 </select>
             </div>
             <div class="form-group" id="hexInputField">
-                <label for="hexInput">8-digit Hex Input:</label>
+                <label for="hexInput">8-digit Hex Input</label>
                 <input type="text" class="form-control" id="hexInput" placeholder="Enter 8-digit hexadecimal value">
             </div>
             <div class="form-group" id="binaryInputField" style="display: none;">
-                <label for="binaryInput">32-bit Binary Input:</label>
+                <label for="binaryInput">32-bit Binary Input</label>
                 <input type="text" class="form-control" id="binaryInput" placeholder="Enter 32-bit binary value (separated by spaces)">
                 <small class="form-text">Format: 1 bit for sign, 8 bits for exponent, 23 bits for mantissa (e.g., 0 10000001 01000000000000000000000).</small>
             </div>
             <div class="form-group">
-                <label for="decimalType">Decimal Output Type:</label>
+                <label for="decimalType">Decimal Output Type</label>
                 <select class="form-control" id="decimalType">
                     <option value="fixed">Fixed Point</option>
                     <option value="floating">Floating Point</option>
@@ -41,7 +41,7 @@
         <div class="results">
             <div class="card">
                 <div class="card-header">
-                    <strong>Result:</strong>
+                    <strong>Result</strong>
                     <button class="btn btn-secondary btn-sm float-right" onclick="copyToNotepad()">Save to Notepad</button>
                 </div>
                 <div class="card-body">
