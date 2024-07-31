@@ -1,17 +1,14 @@
-// Global object to store state and results
-const globalState = {
-    inputType: '',
-    hexInput: '',
-    binaryInput: '',
-    decimalType: '',
-    decimalResult: '',
-    binaryRepresentation: '',
-    detailedResult: null
+// Global object to hold conversion results and special cases
+const conversionResult = {
+    decimal: null,
+    significand: '',
+    base: '',
+    exponent: ''
 };
 
 function toggleInputFields() {
-    globalState.inputType = $('#inputType').val();
-    if (globalState.inputType === 'hex') {
+    const inputType = $('#inputType').val();
+    if (inputType === 'hex') {
         $('#hexInputField').show();
         $('#binaryInputField').hide();
     } else {
@@ -23,39 +20,37 @@ function toggleInputFields() {
 function convert() {
     $('#decimalResult').text(''); // Clear previous result
 
-    try {
-        globalState.inputType = $('#inputType').val();
-        globalState.hexInput = $('#hexInput').val().trim();
-        globalState.binaryInput = $('#binaryInput').val().replace(/\s+/g, '');
-        globalState.decimalType = $('#decimalType').val();
-        globalState.decimalResult = '';
+    const inputType = $('#inputType').val();
+    let result = '';
 
-        if (globalState.inputType === 'hex') {
-            if (isValidHex(globalState.hexInput)) {
-                globalState.binaryRepresentation = hexToBinary(globalState.hexInput);
-                globalState.detailedResult = binaryToDecimal(globalState.binaryRepresentation);
-                const specialCaseResult = checkSpecialCases(globalState.binaryRepresentation);
+    try {
+        if (inputType === 'hex') {
+            const hexInput = $('#hexInput').val().trim();
+            console.log('Hex Input:', hexInput); // Debugging
+            if (isValidHex(hexInput)) {
+                const binaryRepresentation = hexToBinary(hexInput);
+                console.log('Binary Representation:', binaryRepresentation); // Debugging
+                result = binaryToDecimal(binaryRepresentation);
+                // Check and handle special cases for hex input
+                const specialCaseResult = checkHexSpecialCases(hexInput);
                 if (specialCaseResult !== null) {
-                    globalState.decimalResult = specialCaseResult;
-                } else {
-                    globalState.decimalResult = globalState.decimalType === 'fixed' 
-                        ? Number(globalState.detailedResult.decimal).toFixed(2)
-                        : `${globalState.detailedResult.significand} * ${globalState.detailedResult.base}^${globalState.detailedResult.exponent}`;
+                    $('#decimalResult').text(specialCaseResult);
+                    return;
                 }
             } else {
                 alert('Invalid Hexadecimal Input');
                 return;
             }
         } else {
-            if (isValidBinary(globalState.binaryInput)) {
-                globalState.detailedResult = binaryToDecimal(globalState.binaryInput);
-                const specialCaseResult = checkSpecialCases(globalState.binaryInput);
+            const binaryInput = $('#binaryInput').val().replace(/\s+/g, '');
+            console.log('Binary Input:', binaryInput); // Debugging
+            if (isValidBinary(binaryInput)) {
+                result = binaryToDecimal(binaryInput);
+                // Check and handle special cases for binary input
+                const specialCaseResult = checkSpecialCases(binaryInput);
                 if (specialCaseResult !== null) {
-                    globalState.decimalResult = specialCaseResult;
-                } else {
-                    globalState.decimalResult = globalState.decimalType === 'fixed'
-                        ? Number(globalState.detailedResult.decimal).toFixed(2)
-                        : `${globalState.detailedResult.significand} * ${globalState.detailedResult.base}^${globalState.detailedResult.exponent}`;
+                    $('#decimalResult').text(specialCaseResult);
+                    return;
                 }
             } else {
                 alert('Invalid Binary Input');
@@ -63,7 +58,18 @@ function convert() {
             }
         }
 
-        $('#decimalResult').text(globalState.decimalResult);
+        const decimalType = $('#decimalType').val();
+        if (decimalType === 'fixed' && !isNaN(result.decimal)) {
+            const fixedPointValue = Number(result.decimal).toFixed(2); // Adjust for fixed-point representation
+            $('#decimalResult').text(fixedPointValue);
+        } else if (decimalType === 'floating') {
+            // Format the result in scientific notation with base 10
+            const decimalValue = Number(result.decimal);
+            const resultString = decimalValue < 0 ? 
+                `${decimalValue.toExponential().replace('e+', ' * 10^')}` : 
+                `${decimalValue.toExponential().replace('e+', ' * 10^')}`;
+            $('#decimalResult').text(resultString);
+        }
     } catch (error) {
         console.error('Error during conversion:', error);
         alert('An error occurred during conversion. Check the console for details.');
@@ -71,16 +77,25 @@ function convert() {
 }
 
 function isValidHex(hex) {
-    return /^[0-9A-Fa-f]{8}$/.test(hex);
+    // Ensure hexadecimal input is exactly 8 digits
+    const valid = /^[0-9A-Fa-f]{8}$/.test(hex);
+    console.log('Hex Valid:', valid); // Debugging
+    return valid;
 }
 
 function isValidBinary(binary) {
-    return /^[01]{32}$/.test(binary);
+    // Ensure binary input is exactly 32 digits
+    const valid = /^[01]{32}$/.test(binary);
+    console.log('Binary Valid:', valid); // Debugging
+    return valid;
 }
 
 function hexToBinary(hex) {
+    // Convert hexadecimal to binary
     try {
-        return parseInt(hex, 16).toString(2).padStart(32, '0');
+        const binary = parseInt(hex, 16).toString(2).padStart(32, '0');
+        console.log('Hex to Binary:', binary); // Debugging
+        return binary;
     } catch (error) {
         console.error('Error converting hex to binary:', error);
         throw error;
@@ -88,6 +103,7 @@ function hexToBinary(hex) {
 }
 
 function binaryToDecimal(binary) {
+    // Convert binary to decimal
     const specialCaseResult = checkSpecialCases(binary);
     if (specialCaseResult !== null) {
         return { decimal: specialCaseResult, significand: '', base: '', exponent: '' };
@@ -103,38 +119,57 @@ function binaryToDecimal(binary) {
     }
 
     const decimal = (sign ? -1 : 1) * mantissaValue * Math.pow(2, exponent);
-    const significand = mantissaValue.toFixed(2);
-    const base = 10; // Use base 10 for floating-point representation
 
-    return {
+    // Prepare detailed result
+    const significand = mantissaValue.toFixed(2); // Format for better readability
+    const base = 10; // Use base 10 for floating-point representation
+    const detailedResult = {
         decimal,
         significand,
         base,
         exponent
     };
+
+    console.log('Binary to Decimal Result:', detailedResult); // Debugging
+    return detailedResult;
 }
 
 function checkSpecialCases(binary) {
-    const exponent = binary.slice(1, 9);
-    const mantissa = binary.slice(9);
+    // Define special cases dynamically for binary strings
+    const exponentBits = binary.slice(1, 9);
+    const mantissaBits = binary.slice(9);
 
-    if (binary === '00000000000000000000000000000000') return 'Zero';
-    if (binary === '10000000000000000000000000000000') return '-Zero';
-    if (exponent === '11111111') {
-        if (parseInt(mantissa, 2) === 0) return binary[0] === '0' ? 'Infinity' : '-Infinity';
-        return 'NaN';
+    if (binary === '00000000000000000000000000000000') {
+        return 'Zero';
+    } else if (binary === '10000000000000000000000000000000') {
+        return '-Zero';
+    } else if (exponentBits === '11111111') {
+        if (mantissaBits === '00000000000000000000000') {
+            return binary[0] === '0' ? 'Infinity' : '-Infinity';
+        } else if (mantissaBits.includes('1')) {
+            return 'NaN';
+        }
     }
     return null;
 }
 
+
 function checkHexSpecialCases(hex) {
+    // Convert hex to binary for special cases check
     const binary = hexToBinary(hex);
     return checkSpecialCases(binary);
 }
 
 function copyToNotepad() {
+    // Collect input values
+    const inputType = $('#inputType').val();
+    const hexInput = $('#hexInput').val();
+    const binaryInput = $('#binaryInput').val().replace(/\s+/g, '');
+    const decimalType = $('#decimalType').val();
+    const decimalResult = $('#decimalResult').text();
+
     // Check if there is a result to save
-    if (!globalState.decimalResult) {
+    if (!decimalResult) {
         alert('No result to copy.');
         return;
     }
@@ -158,22 +193,26 @@ function copyToNotepad() {
     let content = `IEEE-754 Binary-32 Floating Point Translator:\n\n`;
 
     // Add input details
-    content += `Input Type Selected: ${globalState.inputType === 'hex' ? '8-digit Hexadecimal' : '32-bit Binary'}\n`;
-    if (globalState.inputType === 'hex') {
-        content += `Hexadecimal Input Provided: ${globalState.hexInput}\n`;
-        const binaryRepresentation = hexToBinary(globalState.hexInput);
+    content += `Input Type Selected: ${inputType === 'hex' ? '8-digit Hexadecimal' : '32-bit Binary'}\n`;
+    if (inputType === 'hex') {
+        content += `Hexadecimal Input Provided: ${hexInput}\n`;
+        const binaryRepresentation = hexToBinary(hexInput);
         content += `Equivalent 32-bit Binary Representation: ${formatBinary(binaryRepresentation)}\n`;
     } else {
-        content += `32-bit Binary Input Provided: ${formatBinary(globalState.binaryInput)}\n`;
-        content += `Equivalent 8-digit Hexadecimal Representation: ${binaryToHex(globalState.binaryInput)}\n`;
+        content += `32-bit Binary Input Provided: ${formatBinary(binaryInput)}\n`;
+        content += `Equivalent 8-digit Hexadecimal Representation: ${binaryToHex(binaryInput)}\n`;
     }
-    content += `Decimal Output Type Selected: ${globalState.decimalType === 'fixed' ? 'Fixed Point' : 'Floating Point'}\n`;
+    content += `Decimal Output Type Selected: ${decimalType === 'fixed' ? 'Fixed Point' : 'Floating Point'}\n`;
 
     // Include detailed floating point representation if available
-    if (globalState.decimalType === 'fixed') {
-        content += `\nResult: ${Number(globalState.detailedResult.decimal).toFixed(2)}\n`;
+    if (conversionResult.decimal !== null) {
+        if (decimalType === 'fixed') {
+            content += `\nResult: ${Number(conversionResult.decimal).toFixed(2)}\n`;
+        } else {
+            content += `\nResult: ${conversionResult.significand} * ${conversionResult.base}^${conversionResult.exponent}\n`;
+        }
     } else {
-        content += `\nResult: ${globalState.detailedResult.significand} * ${globalState.detailedResult.base}^${globalState.detailedResult.exponent}\n`;
+        content += `\nResult: ${decimalResult}\n`;
     }
 
     // Create and download the file
