@@ -101,27 +101,18 @@ function checkSpecialCases(value) {
 }
 
 function copyToNotepad() {
-    const decimalResult = $('#decimalResult').text();
-    if (decimalResult) {
-        const blob = new Blob([decimalResult], { type: 'text/plain' });
-        const link = document.createElement('a');
-        link.download = 'FloatingPointResult.txt';
-        link.href = window.URL.createObjectURL(blob);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } else {
-        alert('No result to copy.');
-    }
-}
-
-function copyToNotepad() {
     // Collect input values
     const inputType = $('#inputType').val();
     const hexInput = $('#hexInput').val();
     const binaryInput = $('#binaryInput').val().replace(/\s+/g, '');
     const decimalType = $('#decimalType').val();
     const decimalResult = $('#decimalResult').text();
+
+    // Check if there is a result to save
+    if (!decimalResult) {
+        alert('No result to copy.');
+        return;
+    }
 
     // Convert hexadecimal to binary
     function hexToBinary(hex) {
@@ -163,3 +154,4 @@ function copyToNotepad() {
     link.click();
     document.body.removeChild(link);
 }
+

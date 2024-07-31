@@ -1,16 +1,42 @@
+html,
 body {
     background-color: #f8f9fa;
+    height: 100%;
 }
+.subtext{
+    font-size: 15px;
+}
+
 .container {
-    margin-top: 50px;
-    width: 50%;
+    width: 45%;
+    background-color:black;
+    color:white;
+    padding: 4rem; 
+    min-height: 100%;
 }
 .form-group label {
     font-weight: bold;
+    margin-top: 15px;
 }
 .results {
-    margin-top: 30px;
+    margin-top: 50px;
 }
-.results .card {
-    margin-bottom: 15px;
+
+.form-text{
+    color: white;
+    font-size: 11.5px;
+}
+.card-header{
+    color:black;
+}
+
+.card-body{
+    padding: 1.5rem;
+}
+
+.card-text{
+    color:black
+}
+.btn-primary{
+    margin-top: 15px;
 }
